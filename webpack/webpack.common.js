@@ -28,26 +28,23 @@ module.exports = {
 		new CleanWebpackPlugin(),
 		new HotModuleReplacementPlugin(),
 		new ModuleFederationPlugin({
-			name: 'core_ui', // Name of the core-ui micro-frontend
+			name: 'core_ui',
 			library: { type: 'var', name: 'core_ui' },
 			remotes: {
-				// Remote entry point of other micro-frontend app's
-				app1: 'app1', // app1
-				app2: 'app2', // app2
+				app1: 'app1',
 			},
 			shared: {
-				// List of dependencies shared across micro-frontend
-				...deps,
 				react: {
-					eager: true,
+					singleton: true,
+					requiredVersion: deps.react,
 				},
-
 				'react-dom': {
-					eager: true,
-					import: 'react-dom', // the "react" package will be used a provided and fallback module
-					shareKey: 'react-dom', // under this name the shared module will be placed in the share scope
-					shareScope: 'legacy', // share scope with this name will be used
-					singleton: true, // only a single version of the shared module is allowed
+					singleton: true,
+					requiredVersion: deps['react-dom'],
+				},
+				zustand: {
+					eager: true, // important
+					singleton: true,
 				},
 			},
 		}),

@@ -1,36 +1,50 @@
-import * as React from "react";
-import ErrorBoundary from "./components/ErrorBoundry";
-
+import * as React from "react"
+import ErrorBoundary from "./components/ErrorBoundary"
+import { useEffect, useState } from "react"
+import useStore from "./store/store"
 // @ts-ignore
-const App1 = React.lazy(() => import("app1/App").catch(() => {
+const App1 = React.lazy(() => import("app1/App").catch((error) => {
   // @ts-ignore
-  return import("./components/Fallback");
-}));
-
+  return import("./components/Fallback")
+}))
 // @ts-ignore
-const App2 = React.lazy(() => import("app2/App").catch(() => {
-  // @ts-ignore
-  return import("./components/Fallback");
-}));
-
+// const App2 = React.lazy(() => import("app2/App").catch(() => {
+//   // @ts-ignore
+//   return import("./components/Fallback")
+// }))
 interface AppProps {
   title: string
 }
 
-const App: React.FC<AppProps> = ({ title }) => (
-  <div>
-    <h1><center>{title}</center></h1>
-    <ErrorBoundary appName="App 1">
-      <React.Suspense fallback="Loading App1">
-        <App1 />
-      </React.Suspense>
-    </ErrorBoundary>
-    <ErrorBoundary appName="App 2">
-      <React.Suspense fallback="Loading App2">
-        <App2 />
-      </React.Suspense>
-    </ErrorBoundary>
-  </div>
-);
+const App: React.FC<AppProps> = ({ title }) => {
+  const { count } = useStore()
+  const [loaded, setLoaded] = useState(false)
 
-export default App;
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
+
+  return (
+    <div>
+      <h1><center>{title}</center></h1>
+      <div>
+        <div>
+          {count}
+        </div>
+        <ErrorBoundary appName="App 1">
+          <React.Suspense fallback={<div>Loading App1...</div>}>
+            {loaded && <App1 />}
+            {/* {loaded && <Fallback3 />} */}
+          </React.Suspense>
+        </ErrorBoundary>
+        {/* <ErrorBoundary appName="App 2">
+          <React.Suspense fallback={<div>Loading App1...</div>}>
+            {loaded && <App2 />}
+          </React.Suspense>
+        </ErrorBoundary> */}
+      </div>
+    </div>
+  )
+}
+
+export default App

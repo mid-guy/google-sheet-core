@@ -7,8 +7,9 @@
 		"build": "webpack --config webpack/webpack.config.js --env env=prod"
 	},
 	"dependencies": {
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"zustand": "4.5.3"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.24.7",

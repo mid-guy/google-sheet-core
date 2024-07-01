@@ -1,5 +1,5 @@
 function getDevRemoteEntryUrl(port) {
-	return `//localhost:${port}/remoteEntry.js`;
+	return `http://localhost:${port}/remoteEntry.js`;
 }
 
 function getProdRemoteEntryUrl(domain) {
