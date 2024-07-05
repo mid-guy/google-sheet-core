@@ -1,4 +1,3 @@
-import "./bootstrap"
-// // @ts-ignore
-// import("./bootstrap")
-// export default {}
+// @ts-ignore
+import("./bootstrap");
+export default {}

@@ -16,7 +16,8 @@ module.exports = {
 				'Building Scalable and Modular Web Applications with React, Micro Frontend and Webpack Module Federation',
 			template: path.resolve(__dirname, '..', './src/index.html'),
 			app1RemoteEntry: getDevRemoteEntryUrl(3001), // change this according you're needs
-			// app2RemoteEntry: getDevRemoteEntryUrl(3002), // change this according you're needs
+			app2RemoteEntry: getDevRemoteEntryUrl(3002), // change this according you're needs
+			sharedRemoteEntry: getDevRemoteEntryUrl(3003), // change this according you're needs
 		}),
 	],
 	devtool: 'eval-source-map',

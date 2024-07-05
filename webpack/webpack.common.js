@@ -30,8 +30,11 @@ module.exports = {
 		new ModuleFederationPlugin({
 			name: 'core_ui',
 			library: { type: 'var', name: 'core_ui' },
+			filename: 'remoteEntry.js',
 			remotes: {
 				app1: 'app1',
+				app2: 'app2',
+				shared: 'shared',
 			},
 			shared: {
 				react: {
